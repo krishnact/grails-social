@@ -1,0 +1,32 @@
+---
+# The values in this file can be overridden by another file. We use another yml file named 'secrets.yml' to
+# override these values by passing following JVM param
+# -Dspring.config.name=application,secrets
+# The secrets.yml is NOT to be checked in.
+grails:
+  plugin:
+    springsecurity:
+      rest:
+        token:
+          storage:
+            jwt:
+              secret: 'ChangeThisJwtSecret1234123412341234'
+      oauth2:
+        active: true
+        registration:
+          askToLinkOrCreateAccountUri: '/keycloak/register' # The URI that is called to aks the user to either create a new account or link to an existing account
+          roleNames: ['ROLE_USER'] #A list of role names that should be automatically granted to an OAuth User. The roles will be created if they do not exist
+        providers:
+          google:
+            api_key: 'XXXXXXXXXX'               #needed
+            api_secret: 'XXXXXXXXXX'         #needed
+            successUri: "/oauth2/google/success"    #optional
+            failureUri: "/oauth2/google/failure"    #optional
+            callback: "/oauth2/google/callback"     #optional
+            scopes: "email"                    #optional, see https://developers.google.com/identity/protocols/googlescopes#monitoringv3
+
+keycloak:
+  serverUrl: http://192.168.0.0:8180/
+  realm: 'realmName'
+  clientId: 'clientId'
+  clientSecret: 'Fake Entry'
