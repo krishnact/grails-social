@@ -5,6 +5,10 @@ import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
 import grails.compiler.GrailsCompileStatic
 
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
+import javax.persistence.Id
+
 @GrailsCompileStatic
 @EqualsAndHashCode(includes='username')
 @ToString(includes='username', includeNames=true, includePackage=false)
@@ -16,16 +20,21 @@ class User implements Serializable {
 
 	String username
 	String password
+
 	boolean enabled = true
 	boolean accountExpired
 	boolean accountLocked
 	boolean passwordExpired
+
 
 	Set<Role> getAuthorities() {
 		(UserRole.findAllByUser(this) as List<UserRole>)*.role as Set<Role>
 	}
 
 	def beforeInsert() {
+//		if (this.id == null){
+//			this.id = new Long(System.currentTimeMillis() + System.nanoTime());
+//		}
 		encodePassword()
 	}
 
@@ -42,8 +51,9 @@ class User implements Serializable {
 	static transients = ['springSecurityService']
 
 	static constraints = {
-		password nullable: true, blank: false, password: true
+		password nullable: true, blank: true, password: true
 		username nullable: false, blank: false, unique: true
+		oAuthIDs minSize: 0
 
 	}
 
@@ -51,4 +61,6 @@ class User implements Serializable {
 		password column: '`password`'
 	}
 	static hasMany = [oAuthIDs: OAuthID]
+
+
 }
