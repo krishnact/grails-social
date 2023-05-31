@@ -13,7 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.himalay.coormee.auth;
+package org.himalay.coormee.auth
+
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
+import javax.persistence.Id;
 
 
 
@@ -25,13 +29,19 @@ package org.himalay.coormee.auth;
  */
 class OAuthID implements Serializable {
 
+    @Id
+    @GeneratedValue( strategy = GenerationType.SEQUENCE )
+    Long id;
+
     String provider
     String accessToken
+    String socialId
 
     static belongsTo = [user: User]
 
     static constraints = {
         accessToken unique: true
+        socialId nullable: true
     }
 
     static mapping = {
@@ -39,4 +49,9 @@ class OAuthID implements Serializable {
         accessToken index: "identity_idx"
     }
 
+    static OAuthID findByProviderAndAccessToken(String providerName, String socialId){
+
+        OAuthID oAuthID = OAuthID.findBySocialIdAndProvider(socialId,providerName)
+        return oAuthID;
+    }
 }
