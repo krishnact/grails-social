@@ -28,23 +28,28 @@
                 <asset:image src="grails.svg" alt="Grails Logo"/>
             </a>
         </div>
+<sec:ifLoggedIn>
         <div class="navbar-collapse collapse" aria-expanded="false" style="height: 0.8px;">
             <ul class="nav navbar-nav navbar-right">
                 <g:pageProperty name="page.nav" />
             </ul>
         </div>
+</sec:ifLoggedIn>
     </div>
 </div>
+
 <!-- tag::menu[] -->
 <div class="centered" style="margin: 10px auto;">
+<sec:ifLoggedIn>
     <g:link controller="book" action="index">
-        <g:message code="book.all" default="All"/>
+        <g:message code="book.all" default="All Books"/>
     </g:link>
     <span>|</span>
-    <g:link controller="book" action="favourites">
-        <g:message code="book.favourite" default="Favourites"/>
+    <g:link controller="book" action="index" >
+        <g:message code="book.favourite" default="All Books again"/>
     </g:link>
     <span>|</span>
+</sec:ifLoggedIn>
     <sec:ifNotLoggedIn>
         <g:render template="/auth/loginWithGoogle"/>
     </sec:ifNotLoggedIn>
@@ -59,7 +64,9 @@
     <div class="message" style="display: block">${flash.message}</div>
 </g:if>
 <!-- end::menu[] -->
+<sec:ifLoggedIn>
 <g:layoutBody/>
+</sec:ifLoggedIn>
 
 <div class="footer" role="contentinfo"></div>
 

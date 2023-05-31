@@ -79,4 +79,5 @@ class ApplicationController implements PluginManagerAware {
         SecurityContextHolder.context.authentication = oAuthToken
         redirect(redirectUrl instanceof Map ? redirectUrl : [uri: redirectUrl])
     }
+
 }

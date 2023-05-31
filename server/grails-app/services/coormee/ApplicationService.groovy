@@ -6,7 +6,7 @@ import grails.plugin.springsecurity.oauth2.exception.OAuth2Exception
 import grails.plugin.springsecurity.oauth2.token.OAuth2SpringToken
 import org.himalay.coormee.auth.User
 
-@Transactional
+//@Transactional
 class ApplicationService {
     def springSecurityOauth2BaseService
     def springSecurityService
@@ -20,6 +20,14 @@ class ApplicationService {
     }
 
 
+    /**
+     * This code is mainly copied from SpringSecurityOAuth2Controller.createAccount
+     * https://github.com/grails/grails-spring-security-oauth2/blob/2.0.x/grails-app/controllers/grails/plugin/springsecurity/oauth2/SpringSecurityOAuth2Controller.groovy
+     * @param oAuth2SpringToken
+     * @param userName
+     * @param password
+     * @return
+     */
     OAuth2SpringToken createAccount(OAuth2SpringToken oAuth2SpringToken, String userName, String password) {
         //OAuth2SpringToken oAuth2SpringToken = session[SPRING_SECURITY_OAUTH_TOKEN] as OAuth2SpringToken
         if (!oAuth2SpringToken) {
@@ -39,7 +47,7 @@ class ApplicationService {
 
             user.addTooAuthIDs(provider: oAuth2SpringToken.providerName, accessToken: oAuth2SpringToken.socialId, socialId: oAuth2SpringToken.socialId,  user: user)
             //if (!user.validate() || !user.save()) {
-            if (!user.save(flush: true)) {
+            if (!user.save()) {
                 status.setRollbackOnly()
                 false
             }
@@ -51,7 +59,7 @@ class ApplicationService {
                 // Make sure that the role exists.
                 UserRole.create user, Role.findOrSaveByAuthority(roleName), true
             }
-            user.refresh()
+            //user.refresh()
             // make sure that the new roles are effective immediately
             springSecurityService.reauthenticate(user.username)
             oAuth2SpringToken = springSecurityOauth2BaseService.updateOAuthToken(oAuth2SpringToken, user)

@@ -83,12 +83,12 @@ grails {
                                 [pattern: '/api/v1/public/**',             access: ['permitAll','ROLE_ANONYMOUS'], httpMethod: 'POST'],
                                 [pattern: '/*',                            access: ['ROLE_ADMIN', 'ROLE_USER']],
                                 [pattern: '/*/index',                      access: ['ROLE_ADMIN', 'ROLE_USER']],  // <6>
-                                [pattern: '/*/dashboard',                  access: ['ROLE_ADMIN', 'ROLE_USER']],
-                                [pattern: '/*/create',                     access: ['ROLE_ADMIN', 'ROLE_READWRITE']],
-                                [pattern: '/*/save',                       access: ['ROLE_ADMIN', 'ROLE_READWRITE']],
-                                [pattern: '/*/update/**',                  access: ['ROLE_ADMIN', 'ROLE_READWRITE']],
+                                [pattern: '/*/manage',                     access: ['ROLE_ADMIN', 'ROLE_READWRITE']],
+                                [pattern: '/*/create',                     access: ['ROLE_ADMIN', 'ROLE_USER']],
+                                [pattern: '/*/save',                       access: ['ROLE_ADMIN', 'ROLE_USER']],
+                                [pattern: '/*/update/**',                  access: ['ROLE_ADMIN', 'ROLE_USER']],
                                 [pattern: '/*/delete/*',                   access: ['ROLE_ADMIN']],
-                                [pattern: '/*/edit/*',                     access: ['ROLE_ADMIN','ROLE_READWRITE']],
+                                [pattern: '/*/edit/*',                     access: ['ROLE_ADMIN','ROLE_USER']],
                                 [pattern: '/*/show/**',                    access: ['ROLE_ADMIN', 'ROLE_USER']],
                                 [pattern: '/*/search/**',                  access: ['ROLE_ADMIN', 'ROLE_USER']],
                                 [pattern: '/swImage/install/*',            access: ['ROLE_ADMIN']],
@@ -143,4 +143,5 @@ grails.plugin.datatables.tableDefaults =        [
 ]
 grails.plugin.datatables.jQueryUI=true
 grails.gsp.enable.reload = true
+grails.plugin.springsecurity.logout.handlerNames = ['rememberMeServices', 'securityContextLogoutHandler', 'cookieClearingLogoutHandler']
 

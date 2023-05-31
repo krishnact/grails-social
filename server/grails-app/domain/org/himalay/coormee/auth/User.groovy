@@ -32,9 +32,6 @@ class User implements Serializable {
 	}
 
 	def beforeInsert() {
-//		if (this.id == null){
-//			this.id = new Long(System.currentTimeMillis() + System.nanoTime());
-//		}
 		encodePassword()
 	}
 

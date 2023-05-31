@@ -11,13 +11,7 @@ class BookController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond bookService.list(params), model:[bookCount: bookService.count()]
-    }
-
-    def favourites(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        List<Book> retList = bookService.favourites(params)
-        respond retList, model:[bookCount: retList.size()]
+        [bookList: bookService.list(params),bookCount: bookService.count()]
     }
 
     def show(Long id) {

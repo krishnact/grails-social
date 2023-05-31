@@ -17,9 +17,6 @@ class Role implements Serializable {
 
 	private static final long serialVersionUID = 1
 
-	@Id
-	@GeneratedValue( strategy = GenerationType.SEQUENCE )
-	Long id;
 
 	String authority
 

@@ -15,6 +15,8 @@
  */
 package org.himalay.coormee.auth
 
+import groovy.util.logging.Slf4j
+
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id;
@@ -27,11 +29,8 @@ import javax.persistence.Id;
  * name of the provider. It also has a reference to the corresponding Spring Security
  * user account, although only long IDs are supported at the moment.
  */
+@Slf4j
 class OAuthID implements Serializable {
-
-    @Id
-    @GeneratedValue( strategy = GenerationType.SEQUENCE )
-    Long id;
 
     String provider
     String accessToken
@@ -52,6 +51,11 @@ class OAuthID implements Serializable {
     static OAuthID findByProviderAndAccessToken(String providerName, String socialId){
 
         OAuthID oAuthID = OAuthID.findBySocialIdAndProvider(socialId,providerName)
+        if (oAuthID == null){
+            log.info("No account found for ${socialId} from ${providerName}")
+        }else{
+            log.info("Ys account found for ${socialId} from ${providerName}, ${oAuthID.id}")
+        }
         return oAuthID;
     }
 }
