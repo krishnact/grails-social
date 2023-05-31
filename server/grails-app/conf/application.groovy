@@ -72,11 +72,11 @@ grails {
                                 [pattern: '/**/favicon.ico',               access: ['permitAll']],
                                 [pattern: '/webjars/**',                   access: ['permitAll']],
                                 [pattern: '/apidoc',                       access: ['permitAll']],
-                                [pattern: '/keycloak/register',            access: ['permitAll']],
+                                [pattern: '/application/register',         access: ['permitAll']],
                                 [pattern: '/login/**',                     access: ['permitAll']],
                                 [pattern: '/oauth2/**',                    access: ['permitAll']], // <5>
                                 [pattern: '/logout',                       access: ['permitAll']],
-                                [pattern: '/register/*',                   access: ['permitAll']],
+                                [pattern: '/register/*',                   access: ['ROLE_USER']],
                                 [pattern: '/logout/**',                    access: ['permitAll']],
                                 [pattern: '/api/v1/public/**',             access: ['permitAll','ROLE_ANONYMOUS'], httpMethod: 'GET'],
                                 [pattern: '/api/v1/public/**',             access: ['permitAll','ROLE_ANONYMOUS'], httpMethod: 'PUT'],
@@ -142,5 +142,5 @@ grails.plugin.datatables.tableDefaults =        [
         reportFunction:                         "downloadReport"
 ]
 grails.plugin.datatables.jQueryUI=true
-
+grails.gsp.enable.reload = true
 
