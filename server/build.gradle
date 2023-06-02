@@ -70,11 +70,13 @@ dependencies {
     implementation "org.grails.plugins:views-json-templates"
     implementation 'com.github.scribejava:scribejava-core:8.3.3'
     implementation 'com.github.scribejava:scribejava:8.3.3'
-    implementation 'org.grails.plugins:spring-security-oauth2:2.0.0-RC1'
+    implementation 'org.himalay.grails.plugins:spring-security-oauth2:2.1.0-SNAPSHOT'
     //compile        'org.grails.plugins:spring-security-oauth2-provider:3.0.0-SNAPSHOT'
     //implementation "org.grails.plugins:spring-security-oauth2-google:1.2.0"
-    implementation "grails.spring.security.oauth2:spring-security-oauth2-google:1.5.1.BUILD-SNAPSHOT"
-
+    implementation ("org.himalay.grails.spring.security.oauth2:spring-security-oauth2-google:1.5.1.BUILD-SNAPSHOT"){
+        exclude group: 'org.grails.plugins', module: 'spring-security-oauth2'
+    }
+    implementation 'org.grails.plugins:grails-console:2.1.1'
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
     testImplementation "org.slf4j:slf4j-api:2.0.4"
 

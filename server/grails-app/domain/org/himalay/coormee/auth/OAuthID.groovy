@@ -34,13 +34,12 @@ class OAuthID implements Serializable {
 
     String provider
     String accessToken
-    String socialId
 
     static belongsTo = [user: User]
 
     static constraints = {
         accessToken unique: true
-        socialId nullable: true
+
     }
 
     static mapping = {
@@ -48,13 +47,20 @@ class OAuthID implements Serializable {
         accessToken index: "identity_idx"
     }
 
-    static OAuthID findByProviderAndAccessToken(String providerName, String socialId){
+    /**
+     * We don't have to implement this method because such dynamic methods are provided by Gorm.
+     * I am addign here so that I can document the parameters.
+     * @param providerName Provider Name google, facebook etc
+     * @param accessToken Social Id, like peterpan@gmail.com (google) or peterpan@yahoo.com (facebook)
+     * @return
+     */
+    static OAuthID findByProviderAndAccessToken(String providerName, String accessToken){
 
-        OAuthID oAuthID = OAuthID.findBySocialIdAndProvider(socialId,providerName)
+        OAuthID oAuthID = OAuthID.findByAccessTokenAndProvider(accessToken, providerName)
         if (oAuthID == null){
-            log.info("No account found for ${socialId} from ${providerName}")
+            log.info("No account found for ${accessToken} from ${providerName}")
         }else{
-            log.info("Ys account found for ${socialId} from ${providerName}, ${oAuthID.id}")
+            log.info("Ys account found for ${accessToken} from ${providerName}, ${oAuthID.id}")
         }
         return oAuthID;
     }

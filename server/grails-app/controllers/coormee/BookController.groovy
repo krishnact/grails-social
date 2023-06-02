@@ -15,11 +15,16 @@ class BookController {
     }
 
     def show(Long id) {
-        respond bookService.get(id)
+        if (request.getHeader('Accept') == 'application/json'){
+            respond bookService.get(id)
+        }else {
+            render view: 'show.gsp', model: [book: bookService.get(id)]
+        }
     }
 
     def create() {
-        respond new Book(params)
+        // respond new Book(params) // This sends a JSON which is usful when you are using angular
+        render view: 'create.gsp', model: [book: new Book(params)]
     }
 
     def save(Book book) {

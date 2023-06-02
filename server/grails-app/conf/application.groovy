@@ -64,7 +64,6 @@ grails {
                                 [pattern: '/error',                        access: ['permitAll']],
                                 [pattern: '/index',                        access: ['permitAll']],
                                 [pattern: '/index.gsp',                    access: ['permitAll']],
-                                [pattern: '/shutdown',                     access: ['permitAll']],
                                 [pattern: '/assets/**',                    access: ['permitAll']],
                                 [pattern: '/**/js/**',                     access: ['permitAll']],
                                 [pattern: '/**/css/**',                    access: ['permitAll']],
@@ -72,16 +71,16 @@ grails {
                                 [pattern: '/**/favicon.ico',               access: ['permitAll']],
                                 [pattern: '/webjars/**',                   access: ['permitAll']],
                                 [pattern: '/apidoc',                       access: ['permitAll']],
+
+                                [pattern: '/console/**',                     access: ['permitAll']],
+                                [pattern: '/actuator/**',                     access: ['permitAll']],
+
                                 [pattern: '/application/register',         access: ['permitAll']],
-                                [pattern: '/login/**',                     access: ['permitAll']],
                                 [pattern: '/oauth2/**',                    access: ['permitAll']], // <5>
+                                [pattern: '/login/**',                     access: ['permitAll']],
                                 [pattern: '/logout',                       access: ['permitAll']],
-                                [pattern: '/register/*',                   access: ['ROLE_USER']],
                                 [pattern: '/logout/**',                    access: ['permitAll']],
-                                [pattern: '/api/v1/public/**',             access: ['permitAll','ROLE_ANONYMOUS'], httpMethod: 'GET'],
-                                [pattern: '/api/v1/public/**',             access: ['permitAll','ROLE_ANONYMOUS'], httpMethod: 'PUT'],
-                                [pattern: '/api/v1/public/**',             access: ['permitAll','ROLE_ANONYMOUS'], httpMethod: 'POST'],
-                                [pattern: '/*',                            access: ['ROLE_ADMIN', 'ROLE_USER']],
+
                                 [pattern: '/*/index',                      access: ['ROLE_ADMIN', 'ROLE_USER']],  // <6>
                                 [pattern: '/*/manage',                     access: ['ROLE_ADMIN', 'ROLE_READWRITE']],
                                 [pattern: '/*/create',                     access: ['ROLE_ADMIN', 'ROLE_USER']],
@@ -91,20 +90,32 @@ grails {
                                 [pattern: '/*/edit/*',                     access: ['ROLE_ADMIN','ROLE_USER']],
                                 [pattern: '/*/show/**',                    access: ['ROLE_ADMIN', 'ROLE_USER']],
                                 [pattern: '/*/search/**',                  access: ['ROLE_ADMIN', 'ROLE_USER']],
+                                [pattern: '/book/*',                       access: ['ROLE_ADMIN', 'ROLE_USER']],
+
                                 [pattern: '/swImage/install/*',            access: ['ROLE_ADMIN']],
+
+                                [pattern: '/api/v1/public/**',             access: ['permitAll','ROLE_ANONYMOUS'], httpMethod: 'GET'],
+                                [pattern: '/api/v1/public/**',             access: ['permitAll','ROLE_ANONYMOUS'], httpMethod: 'PUT'],
+                                [pattern: '/api/v1/public/**',             access: ['permitAll','ROLE_ANONYMOUS'], httpMethod: 'POST'],
+                                [pattern: '/*',                            access: ['ROLE_ADMIN', 'ROLE_USER']],
+
                                 [pattern: '/api/login',                    access: ['ROLE_ANONYMOUS']], // <7>
                                 [pattern: '/api/v1/app/**',                access: ['ROLE_ADMIN', 'ROLE_USER', 'ROLE_APIUSER'], httpMethod: 'GET'],
                                 [pattern: '/api/v1/app/**',                access: ['ROLE_ADMIN', 'ROLE_USER', 'ROLE_APIUSER'], httpMethod: 'PUT'],
                                 [pattern: '/api/v1/app/**',                access: ['ROLE_ADMIN', 'ROLE_USER', 'ROLE_APIUSER'], httpMethod: 'POST'],
+
                                 [pattern: '/*/stomp/**',                     access: ['ROLE_ADMIN', 'ROLE_USER', 'ROLE_APIUSER'], httpMethod: 'GET'],
                                 [pattern: '/*/stomp/**',                     access: ['ROLE_ADMIN', 'ROLE_USER', 'ROLE_APIUSER'], httpMethod: 'PUT'],
                                 [pattern: '/*/stomp/**',                     access: ['ROLE_ADMIN', 'ROLE_USER', 'ROLE_APIUSER'], httpMethod: 'POST'],
+
                                 [pattern: '/api/v1',                       access: ['ROLE_ADMIN', 'ROLE_USER'], httpMethod: 'GET'],  // <9>
                                 [pattern: '/api/v1/secure/**',             access: ['ROLE_ADMIN', 'ROLE_USER', 'ROLE_APIUSER'], httpMethod: 'GET'],
                                 [pattern: '/api/v1/secure/**',             access: ['ROLE_ADMIN', 'ROLE_USER', 'ROLE_APIUSER'], httpMethod: 'DELETE'],
                                 [pattern: '/api/v1/secure/**',             access: ['ROLE_ADMIN', 'ROLE_USER', 'ROLE_APIUSER'], httpMethod: 'POST'],
                                 [pattern: '/api/v1/secure/**',             access: ['ROLE_ADMIN', 'ROLE_USER', 'ROLE_APIUSER'], httpMethod: 'PUT'],
+
                                 [pattern: "/oauth/access_token",          access: ["permitAll"], httpMethod: 'POST'],
+
                                 [pattern: "/dataTables/getData/**",        access: ["ROLE_USER"]],
                                 [pattern: "/dataTables/getReport/**",      access: ["ROLE_USER"]]
                         ]

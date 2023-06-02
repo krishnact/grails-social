@@ -13,6 +13,9 @@ grails:
               secret: 'ChangeThisJwtSecret1234123412341234'
       oauth2:
         active: true
+        controllerName : grailsSocialOAuth2
+        controllerName1: springSecurityOAuth2
+        useTransaction: true
         registration:
           askToLinkOrCreateAccountUri: '/application/register' # The URI that is called to aks the user to either create a new account or link to an existing account
           roleNames: ['ROLE_USER'] #A list of role names that should be automatically granted to an OAuth User. The roles will be created if they do not exist
